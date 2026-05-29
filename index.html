@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pablo Elias | UIUX Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Fira Sans', sans-serif;
+            background-color: #0d0f1a;
+            color: #FFFFFF;
+            scroll-behavior: smooth;
+        }
+        h1 { font-size: 48px; font-weight: 500; }
+        h2 { font-size: 72px; font-weight: 500; }
+        h3 { font-size: 32px; font-weight: 500; }
+        h4 { font-size: 28px; font-weight: 500; }
+        
+        .bg-accent { background-color: #E50914; }
+        .text-accent { color: #E50914; }
+        
+        /* New Project Grid Styles */
+        .project-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 32px;
+            padding: 40px 0;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .project-grid::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+
+        .project-card-wrapper {
+            flex: 0 0 auto;
+            width: 440px; /* Tamaño máximo para evitar saltos */
+            height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: center;
+        }
+
+        .project-card {
+            width: 370px;
+            height: 290px;
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background-color: #0d0f1a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-card:hover {
+            width: 440px;
+            height: 340px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border-color: rgba(229, 9, 20, 0.3);
+        }
+
+        .project-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.25); /* Empieza con zoom in */
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.0); /* Se aleja (zoom out) */
+        }
+
+        @media (max-width: 500px) {
+            .project-card-wrapper {
+                width: 90vw;
+                height: auto;
+                aspect-ratio: 424/328;
+                padding-left: 20px;
+            }
+            .project-grid {
+                padding-left: 5%;
+                gap: 20px;
+            }
+            .project-card {
+                width: 100%;
+                height: 100%;
+            }
+            .project-card:hover {
+                width: 100%;
+                height: 100%;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Carousel Fixed Height */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+
+        .carousel-item img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+            border-radius: 1rem;
+        }
+
+        .carousel-item.active {
+            position: absolute;
+            opacity: 1;
+            visibility: visible;
+            z-index: 30;
+        }
+
+        @keyframes float-bg {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(5%, 5%) rotate(5deg); }
+            66% { transform: translate(-5%, 2%) rotate(-3deg); }
+        }
+
+        .slide-html {
+            background-color: #1a1d2e;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Expanded Details Animation */
+        .details-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .details-container.open {
+            max-height: 10000px;
+        }
+
+        /* Parallax Background Elements */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-element-1 {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 80%;
+            max-width: 1000px;
+            opacity: 0.4;
+            filter: blur(60px);
+            animation: float-bg 20s ease-in-out infinite;
+        }
+
+        .bg-element-2 {
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 70%;
+            max-width: 900px;
+            opacity: 0.3;
+            filter: blur(80px);
+            animation: float-bg 25s ease-in-out infinite reverse;
+        }
+
+        .skill-card {
+            background: #0d0f1a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card:hover {
+            background: rgba(229, 9, 20, 0.02);
+            border-color: rgba(229, 9, 20, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .process-card {
+            transition: background 0.4s ease;
+        }
+        .process-card:hover {
+            background-color: #272735 !important;
+        }
+
+        /* Icon Animations */
+        @keyframes icon-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .lucide {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        h2 .lucide, h3 .lucide {
+            animation: icon-float 3s ease-in-out infinite;
+        }
+
+        .skill-card:hover .lucide {
+            transform: scale(1.2) rotate(12deg);
+            filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.5));
+        }
+
+        a:hover .lucide, button:hover .lucide {
+            transform: translateX(4px);
+        }
+        /* Floating Navbar Style */
+        #navbar {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #navbar.nav-scrolled {
+            top: 24px;
+            width: auto;
+            min-width: min(90%, 1000px);
+            background: rgba(13, 15, 26, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            padding: 16px 96px !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        #navbar.nav-scrolled .brand-name {
+            color: white;
+        }
+
+        #navbar.nav-scrolled .brand-logo {
+            filter: brightness(0) invert(1);
+        }
+
+        .brand-logo {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #navbar.nav-scrolled .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #navbar.nav-scrolled .nav-link:hover {
+            color: white;
+        }
+
+        #navbar.nav-scrolled .nav-link.border:hover {
+            color: black !important;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #F8F8FA, #C39465, #F94869);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @media (max-width: 768px) {
+            #navbar.nav-scrolled {
+                padding: 12px 24px !important;
+                min-width: 90%;
+            }
+        }
+    </style>
+    <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=e6be0d47"></script>
+</head>
+<body class="overflow-x-hidden bg-[#0d0f1a]">
+
+    <!-- Parallax Background Elements -->
+    <div class="parallax-bg">
+        <img src="assets/ellipse-bg.png" alt="" class="bg-element-1">
+        <img src="assets/group-bg.png" alt="" class="bg-element-2">
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-1/2 -translate-x-1/2 z-50 bg-transparent px-6 py-4 md:px-12 border-b border-white/0 transition-all duration-300">
+        <div class="max-w-[1512px] mx-auto flex justify-between items-center w-full">
+            <a href="#" class="brand-name flex items-center gap-3 text-lg font-bold tracking-wider uppercase transition-colors duration-300">
+                <img src="Vector.png" alt="Wordmark" class="brand-logo h-[1.2em] w-auto object-contain brightness-0 invert">
+                <span>PABLO ELIAS</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-12 text-sm font-medium">
+                <a href="#proyectos" class="nav-link hover:text-white transition text-white/60">Proyectos</a>
+                <a href="#agora" class="nav-link hover:text-white transition text-white/60">Ágora</a>
+                <a href="#sobre-mi" class="nav-link hover:text-white transition text-white/60">Sobre mí</a>
+                <a href="#contacto" class="nav-link border border-white/20 px-6 py-2 rounded-full hover:bg-white hover:text-black transition flex items-center gap-2 group/btn">
+                    <img src="Vector.png" alt="" class="h-[1.5em] w-0 opacity-0 group-hover/btn:w-6 group-hover/btn:opacity-100 transition-all duration-300 object-contain group-hover/btn:brightness-0">
+                    <span>Contacto</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen bg-transparent pt-0 pb-14 px-6 overflow-hidden">
+        <div class="max-w-[1512px] mx-auto w-full relative min-h-[850px] flex flex-col items-center">
+            
+            <!-- Main Content Group (Image + Stats) shifted 48px left -->
+            <div class="flex flex-col items-center w-full -translate-x-[48px]">
+                <div class="relative z-10 mt-8 w-full max-w-[720px] h-auto rounded-[24px] overflow-hidden shadow-2xl">
+                    <img src="assets/imagenhero.png" alt="Pablo Elias Hero" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Hero Stats -->
+                <div class="mt-8 w-full max-w-[720px] grid grid-cols-3 gap-8 text-center">
+                    <div class="space-y-1 hero-stat transition-transform hover:scale-105 cursor-default">
+                        <p class="text-4xl font-medium text-white tracking-tighter uppercase">+3</p>
+                        <p class="text-[10px] md:text-xs font-medium text-white/40 uppercase tracking-widest leading-tight">
+                            proyectos<br>diseñados
+                        </p>
+                    </div>
+                    <div class="space-y-1 hero-stat transition-transform hover:scale-105 cursor-default">
+                        <p class="text-4xl font-medium text-white tracking-tighter uppercase">2</p>
+                        <p class="text-[10px] md:text-xs font-medium text-white/40 uppercase tracking-widest leading-tight">
+                            app<br>publicadas
+                        </p>
+                    </div>
+                    <div class="space-y-1 hero-stat transition-transform hover:scale-105 cursor-default">
+                        <p class="text-4xl font-medium text-white tracking-tighter uppercase">+100</p>
+                        <p class="text-[10px] md:text-xs font-medium text-white/40 uppercase tracking-widest leading-tight">
+                            mas de<br>pantallas publicadas
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- UIUX Text (Color split at 53.5% aligned perfectly with the folder edge) -->
+            <div class="absolute top-[152px] left-[calc(50%-360px-48px)] -translate-x-[53.5%] z-20 pointer-events-none hidden md:flex items-center">
+                <div class="text-[160px] font-bold uppercase leading-none tracking-tighter bg-gradient-to-r from-white from-[53.5%] to-[#E50914] to-[53.5%] bg-clip-text text-transparent pr-8 pb-2">
+                    UIUX
+                </div>
+            </div>
+
+            <!-- DESIGNER Word (Split at the middle of the 'S': 31.25%, shifted 48px left) -->
+            <div class="absolute top-[280px] left-[calc(50%+360px-48px)] -translate-x-[31.25%] z-40 pointer-events-none hidden md:flex items-center">
+                <div class="text-[160px] font-medium uppercase leading-none tracking-tighter bg-gradient-to-r from-[#E50914] from-[31.25%] to-white to-[31.25%] bg-clip-text text-transparent pr-8 pb-2">
+                    DESIGNER
+                </div>
+            </div>
+
+            <!-- Description Block (Shifted 48px left, aligned buttons with stats) -->
+            <div class="absolute top-[510px] left-[calc(50%+360px+32px-48px)] z-40 w-full max-w-[400px] flex flex-col items-start gap-4">
+                <div class="space-y-0">
+                    <h2 class="text-[40px] font-light text-white uppercase leading-tight">HOLA,</h2>
+                    <h2 class="text-[40px] font-light text-white uppercase leading-tight">
+                        SOY <span class="text-[#E50914]">PABLO ELIAS</span>
+                    </h2>
+                </div>
+                <p class="text-white/70 text-base leading-relaxed text-left font-normal mb-10">
+                    Interfaces claras, decisiones reales y productos que funcionan.
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                    <a href="#proyectos" class="bg-[#E50914] text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition shadow-lg flex items-center justify-center space-x-2 group/btn">
+                        <img src="Vector.png" alt="" class="h-[1.5em] w-0 opacity-0 group-hover/btn:w-6 group-hover/btn:opacity-100 transition-all duration-300 object-contain brightness-0 invert">
+                        <span>Ver Proyectos</span>
+                    </a>
+                    <a href="assets/Pablo Elias-CV.pdf" target="_blank" class="border border-white/20 text-white px-8 py-4 rounded-full text-sm font-medium hover:bg-white hover:text-black transition flex items-center justify-center space-x-2 group/btn">
+                        <img src="Vector.png" alt="" class="h-[1.5em] w-0 opacity-0 group-hover/btn:w-6 group-hover/btn:opacity-100 transition-all duration-300 object-contain group-hover/btn:brightness-0">
+                        <span>Descargar CV</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos Section -->
+    <section id="proyectos" class="py-14 px-6 bg-transparent relative z-10 min-h-[768px] flex flex-col justify-center">
+        <div class="max-w-[1512px] mx-auto w-full">
+            <div class="mb-24">
+                <span class="bg-black/20 text-accent uppercase tracking-[0.3em] text-xl font-medium mb-6 inline-block px-6 py-2 rounded-full">proyectos</span>
+                <h2 class="text-[72px] font-light uppercase tracking-tighter leading-tight text-gradient py-2">DISEÑO EN ACCIÓN</h2>
+            </div>
+            <div class="project-grid">
+                <!-- Project 1: AguaLuz -->
+                <div class="project-card-wrapper project-card-fade transition-all duration-700 ease-out">
+                    <a href="agualuz.html" class="group relative block w-[400px] h-[450px] rounded-[32px] overflow-hidden transition-all duration-500">
+                        <!-- Fondo -->
+                        <img src="assets/lemonth/proyectcard-lemoth.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- Texto (Arriba Izquierda) -->
+                        <div class="absolute top-8 left-8 z-20">
+                            <h3 class="text-xl font-medium text-white uppercase tracking-tight">AGUALUZ</h3>
+                            <p class="text-base text-white/70">Saas + mobile</p>
+                        </div>
+
+                        <!-- Texto "Ver" (Inferior Derecha - Solo visible en Hover) -->
+                        <div class="absolute bottom-[32px] right-[48px] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-base font-medium text-white uppercase tracking-widest">Explorar</span>
+                        </div>
+                        
+                        <!-- Elemento de Interacción (Entra con rebote sutil desde abajo a la izquierda, efecto asomado) -->
+                        <div class="absolute bottom-[-100px] -left-20 z-30 w-72 h-auto opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.2,0.64,1)] group-hover:bottom-[-40px] group-hover:left-[-40px] group-hover:opacity-100">
+                             <img src="assets/agualuz/screensgroup.png" alt="AguaLuz Project Peek" class="w-full h-full object-contain">
+                        </div>
+                    </a>
+                </div>
+                <!-- Project 2: LeMonth -->
+                <div class="project-card-wrapper project-card-fade transition-all duration-700 ease-out">
+                    <a href="lemonth.html" class="group relative block w-[400px] h-[450px] rounded-[32px] overflow-hidden transition-all duration-500">
+                        <!-- Fondo -->
+                        <img src="assets/lemonth/proyectcard-lemoth.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- Texto (Arriba Izquierda) -->
+                        <div class="absolute top-8 left-8 z-20">
+                            <h3 class="text-xl font-medium text-white uppercase tracking-tight">LEMONTH</h3>
+                            <p class="text-base text-white/70">Product Website</p>
+                        </div>
+
+                        <!-- Texto "Ver" (Inferior Derecha - Solo visible en Hover) -->
+                        <div class="absolute bottom-[32px] right-[48px] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-base font-medium text-white uppercase tracking-widest">Explorar</span>
+                        </div>
+                        
+                        <!-- Elemento de Interacción (Entra con rebote sutil desde abajo a la izquierda) -->
+                        <div class="absolute bottom-[-100px] -left-20 z-30 w-64 h-auto opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.2,0.64,1)] group-hover:bottom-[-40px] group-hover:left-[-40px] group-hover:opacity-100">
+                             <img src="assets/lemonth/2-LeMonth-Classic-D.png" alt="LeMonth Project Peek" class="w-full h-full object-contain">
+                        </div>
+                    </a>
+                </div>
+                <!-- Project 3: Fujita Quest -->
+                <div class="project-card-wrapper project-card-fade transition-all duration-700 ease-out">
+                    <a href="fujita.html" class="group relative block w-[400px] h-[450px] rounded-[32px] overflow-hidden transition-all duration-500">
+                        <!-- Fondo -->
+                        <img src="assets/lemonth/proyectcard-lemoth.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- Texto (Arriba Izquierda) -->
+                        <div class="absolute top-8 left-8 z-20">
+                            <h3 class="text-xl font-medium text-white uppercase tracking-tight">FUJITA</h3>
+                            <p class="text-base text-white/70">Mobile Game</p>
+                        </div>
+
+                        <!-- Texto "Ver" (Inferior Derecha - Solo visible en Hover) -->
+                        <div class="absolute bottom-[32px] right-[48px] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-base font-medium text-white uppercase tracking-widest">Explorar</span>
+                        </div>
+                        
+                        <!-- Elemento de Interacción (Entra con rebote sutil desde abajo a la izquierda, efecto asomado) -->
+                        <div class="absolute bottom-[-100px] -left-20 z-30 w-64 h-auto opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.2,0.64,1)] group-hover:bottom-[-40px] group-hover:left-[-40px] group-hover:opacity-100">
+                             <img src="assets/fujita/fujita login.png" alt="Fujita Project Peek" class="w-full h-full object-contain">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ágora Project Section -->
+    <section id="agora" class="py-24 px-6 relative z-10 bg-transparent">
+        <div class="max-w-[1512px] mx-auto w-full">
+            <div class="mb-24">
+                <span class="bg-black/20 text-accent uppercase tracking-[0.3em] text-xl font-medium mb-12 inline-block px-6 py-2 rounded-full">Proyecto personal</span>
+                
+                <div class="flex flex-col lg:flex-row gap-16 items-start lg:items-center">
+                    <!-- Tarjeta Dorada -->
+                    <div class="relative w-full max-w-[400px] h-[450px] rounded-[32px] overflow-hidden border border-[#C39465]/20 bg-[#0d0f1a] shadow-2xl group shrink-0">
+                        <!-- Fondo con textura sutil -->
+                        <img src="assets/lemonth/proyectcard-lemoth.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#C39465]/10 to-transparent"></div>
+                        
+                        <!-- Título en la Tarjeta -->
+                        <div class="absolute top-8 left-8 z-20">
+                            <h3 class="text-xl font-medium text-white uppercase tracking-tight">ÁG<span class="text-[#C39465]">O</span>RA</h3>
+                            <p class="text-base text-[#C39465]/70">UX/UI Case Study</p>
+                        </div>
+
+                        <!-- Texto en proceso (Hover) - 24px desde el borde inferior -->
+                        <p class="absolute bottom-[24px] left-8 z-40 text-base font-medium text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">en proceso</p>
+
+                        <!-- Elemento de Interacción (Yomero) -->
+                        <div class="absolute bottom-[-100px] -left-20 z-30 w-72 h-auto opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.2,0.64,1)] group-hover:bottom-[-40px] group-hover:left-[-40px] group-hover:opacity-100">
+                             <img src="assets/ágora/yomero.png" alt="Yomero" class="w-full h-full object-contain">
+                        </div>
+                    </div>
+
+                    <div class="space-y-12 w-fit max-w-5xl">
+                        <h3 class="text-3xl md:text-5xl font-light text-white uppercase tracking-tight leading-tight">
+                            Una app que conecta a estudiantes universitarios con comercios locales
+                        </h3>
+
+                        <!-- Botón Ver Detalles alineado al eje vertical -->
+                        <div class="shrink-0 mb-1">
+                            <button id="toggle-agora" class="border border-white/20 text-white px-8 py-4 rounded-full text-sm font-medium hover:bg-white hover:text-black transition flex items-center gap-2 group/btn">
+                                <img src="Vector.png" alt="" class="h-[1.5em] w-0 opacity-0 group-hover/btn:w-6 group-hover/btn:opacity-100 transition-all duration-300 object-contain group-hover/btn:brightness-0">
+                                <span class="btn-text">Ver detalles</span>
+                                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-500 group-[.open]/btn:rotate-180"></i>
+                            </button>
+                        </div>
+
+                        <p class="text-xl text-white/50 font-normal leading-relaxed max-w-2xl">
+                            Explora los detalles de este proyecto que busca resolver una problemática de beneficios estudiantiles.
+                        </p>
+                    </div>                </div>
+            </div>
+
+            <!-- Detalles Colapsables -->
+            <div id="agora-details" class="details-container">
+                <!-- Contexto -->
+                <div class="mb-32">
+                     <div class="flex items-center gap-4 mb-10">
+                        <i data-lucide="castle" class="text-white w-10 h-10"></i>
+                        <h3 class="text-4xl md:text-5xl font-bold uppercase tracking-tighter text-white">CONTEXTO</h3>
+                    </div>
+                    <p class="text-lg md:text-xl font-normal leading-relaxed text-white/90 max-w-[1200px]">
+                        La ciudad de la plata se caracteriza por ser una ciudad universitaria, por esto locales ofrecen beneficios a estudiantes que no siempre cuentan con la visibilidad por la falta de centralización de estos. Desde este punto de partida pensé en diseñar una App nativa que conecte estudiantes universitarios con beneficios y promociones verificadas de comercios locales.
+                    </p>
+                </div>
+
+                <!-- Problemática y Soluciones (Redesign based on image) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-32 text-center">
+                    <!-- Problemática -->
+                    <div class="flex flex-col items-center h-full">
+                        <div class="w-32 h-32 mb-6 flex items-center justify-center relative">
+                            <img src="assets/problem-icon.png" alt="Icono Problemática" class="h-[123px] w-auto object-contain">
+                        </div>
+                        <h4 class="text-2xl font-bold text-white uppercase tracking-tight mb-10">PROBLEMÁTICA</h4>
+                        <div class="mt-auto flex flex-col gap-3 w-full max-w-[300px]">
+                            <span class="px-4 py-4 bg-[#3a1111] text-white rounded-2xl text-[18px] font-medium border border-white/5">Beneficios dispersos</span>
+                            <span class="px-4 py-4 bg-[#3a1111] text-white rounded-2xl text-[18px] font-medium border border-white/5">Difícil acceso a promociones</span>
+                            <span class="px-4 py-4 bg-[#3a1111] text-white rounded-2xl text-[18px] font-medium border border-white/5">Baja visibilidad para comercios</span>
+                            <span class="px-4 py-4 bg-[#3a1111] text-white rounded-2xl text-[18px] font-medium border border-white/5">Falta de validación estudiantil</span>
+                        </div>
+                    </div>
+                    <!-- Solución Estudiantes -->
+                    <div class="flex flex-col items-center h-full">
+                        <div class="w-32 h-32 mb-6 flex items-center justify-center relative">
+                            <img src="assets/student-solution-icon.png" alt="Icono Solución Estudiantes" class="h-[123px] w-auto object-contain">
+                        </div>
+                        <h4 class="text-2xl font-bold text-white uppercase tracking-tight mb-10">SOLUCIÓN PARA LOS ESTUDIANTES</h4>
+                        <div class="mt-auto flex flex-col gap-3 w-full max-w-[300px]">
+                            <span class="px-4 py-4 bg-[#4C8056]/80 text-white rounded-2xl text-[18px] font-medium border border-white/5">Encontrar todos los descuentos</span>
+                            <span class="px-4 py-4 bg-[#4C8056]/80 text-white rounded-2xl text-[18px] font-medium border border-white/5">Obtener mayores beneficios</span>
+                            <span class="px-4 py-4 bg-[#4C8056]/80 text-white rounded-2xl text-[18px] font-medium border border-white/5">Impulsar el apoyo al cursante</span>
+                        </div>
+                    </div>
+                    <!-- Solución Comercios -->
+                    <div class="flex flex-col items-center h-full">
+                        <div class="w-32 h-32 mb-6 flex items-center justify-center relative">
+                            <img src="assets/merchant-solution-icon.png" alt="Icono Solución Comercios" class="h-[123px] w-auto object-contain">
+                        </div>
+                        <h4 class="text-2xl font-bold text-white uppercase tracking-tight mb-10">SOLUCIÓN PARA LOS COMERCIOS</h4>
+                        <div class="mt-auto flex flex-col gap-3 w-full max-w-[300px]">
+                            <span class="px-4 py-4 bg-[#4C8056]/80 text-white rounded-2xl text-[18px] font-medium border border-white/5">Aumentar la visibilidad</span>
+                            <span class="px-4 py-4 bg-[#4C8056]/80 text-white rounded-2xl text-[18px] font-medium border border-white/5">Mayor control de la gestión</span>
+                            <span class="px-4 py-4 bg-[#4C8056]/80 text-white rounded-2xl text-[18px] font-medium border border-white/5">Retroalimentación constante</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proceso -->
+                <div class="mb-12">
+                     <div class="flex items-center gap-4 mb-10 border-t border-white/10 pt-10">
+                        <i data-lucide="lightbulb" class="text-white w-10 h-10"></i>
+                        <h3 class="text-4xl md:text-5xl font-bold uppercase tracking-tighter text-white">¿CÓMO SE ABORDA?</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Discovery -->
+                        <div class="skill-card process-card p-8 rounded-[32px] space-y-6 !border-none bg-[#3D3D52]">
+                            <span class="bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit">Completado</span>
+                            <h4 class="text-xl font-medium text-white uppercase tracking-tight"><span class="text-white/20 mr-2">01</span> Discovery & Research</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Benchmark</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Análisis de aplicaciones similares dentro de LATAM para identificar patrones, oportunidades y puntos de fricción.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Definición de roles/arquetipos</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Comerciante / Estudiante / Visitante externo y Admin</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Entrevistas</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Comerciantes y Estudiantes</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Insight</p>
+                                    <div class="space-y-2 pt-2">
+                                        <p class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-4 py-2"><span class="w-1 h-1 rounded-full bg-accent"></span> Descuentos descentralizados</p>
+                                        <p class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-4 py-2"><span class="w-1 h-1 rounded-full bg-accent"></span> Visibilidad local para comercios</p>
+                                        <p class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-4 py-2"><span class="w-1 h-1 rounded-full bg-accent"></span> Validación y confianza comercial</p>
+                                        <p class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-4 py-2"><span class="w-1 h-1 rounded-full bg-accent"></span> Rapidez y accesibilidad</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Estrategia UX -->
+                        <div class="skill-card process-card p-8 rounded-[32px] space-y-6 !border-none bg-[#3D3D52]">
+                            <span class="bg-orange-500/10 text-orange-400 border border-orange-500/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit">En proceso</span>
+                            <h4 class="text-xl font-medium text-white uppercase tracking-tight"><span class="text-white/20 mr-2">02</span> Estrategia UX</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Definición del MVP</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Registro, validación, exploración de comercios y obtención de descuentos.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Userflow</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Comerciante / Estudiante / Visitante externo y Admin.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Card Sorting</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Sesiones con Estudiantes y Comercios para la IA.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">IA</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Arquitectura de la información validada con usuarios.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Interfaz -->
+                        <div class="skill-card process-card p-8 rounded-[32px] space-y-6 !border-none bg-[#3D3D52]">
+                            <span class="bg-[#8584A4]/10 text-[#8584A4] border border-[#8584A4]/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit">Próximo</span>
+                            <h4 class="text-xl font-medium text-white uppercase tracking-tight"><span class="text-white/20 mr-2">03</span> Exploración Interfaz</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Moodboard & Wireframes</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Exploración visual y estructuras de baja fidelidad.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Design Tokens</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Colores, tipografía, espaciados, opacidad y sombras.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Análisis e iteración</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Revisión de flujos, jerarquía y prototipado en baja.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Pruebas de usabilidad</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Cualitativos presenciales</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ejecución -->
+                        <div class="skill-card process-card p-8 rounded-[32px] space-y-6 !border-none bg-[#3D3D52]">
+                            <span class="bg-[#8584A4]/10 text-[#8584A4] border border-[#8584A4]/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit">Próximo</span>
+                            <h4 class="text-xl font-medium text-white uppercase tracking-tight"><span class="text-white/20 mr-2">04</span> Ejecución</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Sistema de componentes</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Diseño atómico (atom, molecule, organism) con variantes.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Flujos finales & Prototipado</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Definición visual de caminos y prototipo funcional.</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white uppercase mb-1">Handoff técnico</p>
+                                    <p class="text-sm text-white/50 font-normal leading-relaxed">Documentación y preparación de archivos para desarrollo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-8 md:p-12 rounded-[32px] text-center mb-12">
+                    <p class="text-lg md:text-xl text-[#F8F8FA] font-medium leading-relaxed">
+                        Debido a la confidencialidad y al desarrollo continuo, algunos flujos de trabajo y detalles estratégicos no están disponibles públicamente.
+                    </p>
+                </div>
+
+                <!-- Invitación y Botones Finales -->
+                <div class="flex flex-col items-end gap-8 mb-24">
+                    <p class="text-xl md:text-2xl text-[#F8F8FA] font-normal text-right max-w-2xl leading-tight">
+                        Si te interesa saber más sobre el proyecto o mi trabajo, pongámonos en contacto.
+                    </p>
+                    
+                    <div class="flex flex-col md:flex-row justify-end items-center gap-4">
+                        <a href="#contacto" class="bg-accent text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition shadow-lg flex items-center justify-center space-x-2 group/btn">
+                            <img src="Vector.png" alt="" class="h-[1.5em] w-0 opacity-0 group-hover/btn:w-6 group-hover/btn:opacity-100 transition-all duration-300 object-contain brightness-0 invert">
+                            <span>Saber más</span>
+                        </a>
+                        <button id="collapse-agora" class="border border-white/20 text-white px-8 py-4 rounded-full text-sm font-medium hover:bg-white hover:text-black transition flex items-center gap-2 group/btn">
+                            <i data-lucide="chevron-up" class="w-4 h-4"></i>
+                            <span>Ocultar detalles</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="habilidades" class="py-14 px-6 relative z-10">
+        <div class="max-w-[1512px] mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div class="max-w-2xl">
+                    <span class="bg-black/20 text-accent uppercase tracking-[0.3em] text-xl font-medium mb-6 inline-block px-6 py-2 rounded-full">skill</span>
+                    <h3 class="text-[72px] font-light uppercase tracking-tighter relative z-10 leading-none text-gradient">DE PROBLEMA A SOLUCIÓN</h3>
+                </div>
+                <p class="text-white/40 text-base max-w-sm pb-2 border-l-2 border-accent pl-6 font-normal">
+                    Combinando estética y funcionalidad para crear productos digitales memorables.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Skill 1 -->
+                <div class="skill-card p-8 rounded-[32px] space-y-6">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="layout" class="text-accent w-8 h-8"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-medium text-white uppercase tracking-tight">Design Thinking</h4>
+                        <p class="text-base text-white/50 leading-relaxed font-normal">Definición de producto, propuesta de valor y alineación de objetivos.</p>
+                        <ul class="space-y-2 pt-4 border-t border-white/5">
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Problem Framing</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Information Architecture</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> User Flow Mapping</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Feature Prioritization</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Conversion-Oriented Decisions</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Skill 2 -->
+                <div class="skill-card p-8 rounded-[32px] space-y-6">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="component" class="text-accent w-8 h-8"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-medium text-white uppercase tracking-tight">Visual & Interface Systems</h4>
+                        <p class="text-base text-white/50 leading-relaxed font-normal">Creación de interfaces intuitivas y estéticas con enfoque en la usabilidad.</p>
+                        <ul class="space-y-2 pt-4 border-t border-white/5">
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> High-Fidelity UI Design</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Layout & Grid Systems</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Typography Systems</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Color Systems & Visual Hierarchy</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Component-Based Design</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Design Systems Thinking</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Brand Translation to Interface</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Skill 3 -->
+                <div class="skill-card p-8 rounded-[32px] space-y-6">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="map" class="text-accent w-8 h-8"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-medium text-white uppercase tracking-tight">Product & Structure</h4>
+                        <p class="text-base text-white/50 leading-relaxed font-normal">Análisis de comportamiento y necesidades de usuarios reales.</p>
+                        <ul class="space-y-2 pt-4 border-t border-white/5">
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Information Architecture</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> User Flow Mapping</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Feature Prioritization</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Conversion-Oriented Decisions</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Dashboard Structuring</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Content Hierarchy</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Iterative Design Process</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Skill 4 -->
+                <div class="skill-card p-8 rounded-[32px] space-y-6">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="play-circle" class="text-accent w-8 h-8"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-medium text-white uppercase tracking-tight">Tools & Execution</h4>
+                        <p class="text-base text-white/50 leading-relaxed font-normal">Construcción de prototipos interactivos de alta fidelidad.</p>
+                        <ul class="space-y-2 pt-4 border-t border-white/5">
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Figma (Auto Layout, Components, Variants)</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Responsive Design</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Interactive Prototyping</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Design Handoff to Developers</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> UI Documentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí Section -->
+    <section id="sobre-mi" class="py-14 px-6 relative z-10 overflow-hidden min-h-[768px]">
+        <!-- Background Hand Silhouette -->
+        <div class="absolute top-1/2 left-0 -translate-y-1/2 z-0 opacity-30 pointer-events-none">
+            <img src="assets/mano-bg.png" alt="" class="h-[800px] w-auto object-contain">
+        </div>
+
+        <div class="max-w-[1512px] mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 items-start">
+                <div class="space-y-12">
+                    <div class="mb-24">
+                        <span class="bg-black/20 text-accent uppercase tracking-[0.3em] text-xl font-medium mb-6 inline-block px-6 py-2 rounded-full">sobre mí</span>
+                        <h2 class="text-[72px] font-light uppercase tracking-tighter leading-tight text-gradient py-2">UN POCO DE MÍ</h2>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <p class="text-base text-white/80 font-normal leading-relaxed">
+                            Soy diseñador UI/UX con experiencia en el diseño de productos digitales, me especializo en diseño de interfaces con estructuras claras y limpias.
+                        </p>
+                        <p class="text-base text-white/80 font-normal leading-relaxed">
+                            He trabajado en múltiples proyectos colaborando tanto en ejecución visual como en coordinación de equipos, participando en decisiones de producto y organización de funcionalidades.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-end">
+                    <div class="relative z-10 w-fit rounded-[40px] overflow-hidden shadow-2xl border border-white/5">
+                        <img src="assets/perfil-v5.png" alt="Pablo Elias" class="h-[500px] w-auto object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-14 px-6 bg-[#0a0c16] min-h-[768px] flex flex-col justify-center">
+        <div class="max-w-[1512px] mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                <div class="space-y-12">
+                    <h2 class="text-[72px] font-light text-white uppercase tracking-tighter leading-none">
+                        CONTACTO
+                    </h2>
+                    <p class="text-base text-white/60 max-w-md font-normal leading-relaxed">
+                        Estoy disponible para nuevos desafíos y colaboraciones. Hablemos sobre cómo puedo ayudarte a potenciar tu producto.
+                    </p>
+                </div>
+
+                <div class="space-y-8 bg-white/5 p-10 md:p-12 rounded-[40px] border border-white/5 flex flex-col justify-center">
+                    <div class="space-y-6">
+                        <h4 class="text-2xl font-medium text-white uppercase tracking-tight">Hablemos directamente</h4>
+                        <div class="space-y-8">
+                            <a href="mailto:pabloeliasn.n@gmail.com" class="flex items-center gap-6 text-white/60 hover:text-white transition-all duration-300 group">
+                                <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-accent transition-all duration-300">
+                                    <i data-lucide="mail" class="w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                                </div>
+                                <div class="space-y-1">
+                                    <p class="text-base font-medium uppercase tracking-widest text-white/40">Email</p>
+                                    <p class="text-base font-normal">pabloeliasn.n@gmail.com</p>
+                                </div>
+                            </a>
+
+                            <a href="https://wa.me/5492996341746" target="_blank" class="flex items-center gap-6 text-white/60 hover:text-white transition-all duration-300 group">
+                                <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-accent transition-all duration-300">
+                                    <i data-lucide="phone" class="w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                                </div>
+                                <div class="space-y-1">
+                                    <p class="text-base font-medium uppercase tracking-widest text-white/40">Teléfono / WhatsApp</p>
+                                    <p class="text-base font-normal">+54 9 299 6341746</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#0a0a0a] border-t border-white/5 pt-24 pb-12 px-6 relative z-10">
+        <div class="max-w-[1512px] mx-auto">
+            <!-- Pre-footer CTA -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-24 gap-12">
+                <div class="max-w-4xl">
+                    <h2 class="text-[64px] md:text-[80px] font-light text-white uppercase tracking-tighter leading-none mb-6">
+                        ¿LISTO PARA CREAR <br> <span class="text-accent">ALGO INCREÍBLE?</span>
+                    </h2>
+                    <p class="text-white/40 text-xl font-normal max-w-xl">
+                        Hablemos sobre cómo mis decisiones de diseño pueden potenciar tu próximo producto digital.
+                    </p>
+                </div>
+                <a href="https://wa.me/5492996341746" target="_blank" class="bg-accent text-white px-12 py-6 rounded-full text-lg font-medium hover:scale-105 transition shadow-[0_20px_50px_rgba(229,9,20,0.2)] flex items-center gap-4 group">
+                    <span>Hablemos ahora</span>
+                    <i data-lucide="arrow-up-right" class="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 pb-24 border-b border-white/5">
+                <!-- Brand Column -->
+                <div class="space-y-8 col-span-1 lg:col-span-1">
+                    <a href="#" class="brand-name flex items-center gap-3 text-lg font-bold tracking-wider uppercase group">
+                        <img src="Vector.png" alt="Wordmark" class="brand-logo h-[1.2em] w-auto object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all">
+                        <span class="group-hover:text-accent transition-colors">PABLO ELIAS</span>
+                    </a>
+                    <p class="text-white/40 text-sm leading-relaxed max-w-xs font-normal">
+                        UI/UX Designer especializado en interfaces limpias y experiencias centradas en el usuario.
+                    </p>
+                </div>
+
+                <!-- Navigation Column -->
+                <div class="space-y-8">
+                    <h4 class="text-white/20 text-xs font-bold uppercase tracking-[0.2em]">Navegación</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#proyectos" class="text-white/60 hover:text-white hover:translate-x-2 flex items-center gap-2 transition-all duration-300 font-normal">Proyectos</a></li>
+                        <li><a href="#agora" class="text-white/60 hover:text-white hover:translate-x-2 flex items-center gap-2 transition-all duration-300 font-normal">Ágora</a></li>
+                        <li><a href="#sobre-mi" class="text-white/60 hover:text-white hover:translate-x-2 flex items-center gap-2 transition-all duration-300 font-normal">Sobre mí</a></li>
+                        <li><a href="#habilidades" class="text-white/60 hover:text-white hover:translate-x-2 flex items-center gap-2 transition-all duration-300 font-normal">Habilidades</a></li>
+                        <li><a href="#contacto" class="text-white/60 hover:text-white hover:translate-x-2 flex items-center gap-2 transition-all duration-300 font-normal">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Column -->
+                <div class="space-y-8">
+                    <h4 class="text-white/20 text-xs font-bold uppercase tracking-[0.2em]">Redes</h4>
+                    <ul class="space-y-4">
+                        <li><a href="https://www.linkedin.com/in/pablo-elias-ramo-aab8211b4/" target="_blank" class="text-white/60 hover:text-white hover:translate-x-2 flex items-center gap-2 transition-all duration-300 font-normal"><i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="space-y-8">
+                    <h4 class="text-white/20 text-xs font-bold uppercase tracking-[0.2em]">Ubicación</h4>
+                    <div class="space-y-2">
+                        <p class="text-white/60 font-normal">La Plata, Argentina</p>
+                        <p class="text-white/40 text-sm font-normal">Disponible para el mundo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-white/20 text-xs font-normal uppercase tracking-widest">
+                    © 2026 PABLO ELIAS. TODOS LOS DERECHOS RESERVADOS.
+                </p>
+                <div class="flex items-center gap-2 text-white/20 text-xs font-normal uppercase tracking-widest">
+                    <span>DISEÑADO CON</span>
+                    <i data-lucide="heart" class="w-3 h-3 text-accent fill-accent"></i>
+                    <span>POR PABLO ELIAS</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Force scroll to top on page load
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        window.addEventListener('load', () => {
+            if (!window.location.hash) {
+                window.scrollTo(0, 0);
+            }
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            function initCarousel(containerId, nextBtnId) {
+                const container = document.getElementById(containerId);
+                const nextBtn = document.getElementById(nextBtnId);
+                if (!container || !nextBtn) return;
+                
+                const items = container.querySelectorAll('.carousel-item');
+                if (items.length === 0) return;
+                
+                let currentIndex = 0;
+
+                function showNext() {
+                    items[currentIndex].classList.remove('active');
+                    currentIndex = (currentIndex + 1) % items.length;
+                    items[currentIndex].classList.add('active');
+                }
+                nextBtn.addEventListener('click', showNext);
+            }
+
+            function initExpand(toggleId, collapseId, detailsId) {
+                const toggleBtn = document.getElementById(toggleId);
+                const collapseBtn = document.getElementById(collapseId);
+                const details = document.getElementById(detailsId);
+                if (!toggleBtn || !details) return;
+
+                const btnText = toggleBtn.querySelector('.btn-text');
+
+                function toggleDetails() {
+                    const isOpen = details.classList.contains('open');
+                    details.classList.toggle('open');
+                    toggleBtn.classList.toggle('open');
+                    if (btnText) {
+                        btnText.textContent = isOpen ? 'Ver detalles' : 'Ocultar detalles';
+                    }
+
+                    // Auto-scroll to details when opening
+                    if (!isOpen) {
+                        setTimeout(() => {
+                            const yOffset = -100; // Margen para la navbar
+                            const element = details;
+                            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                            window.scrollTo({ top: y, behavior: 'smooth' });
+                        }, 50); // Retraso mínimo para asegurar que el contenido sea visible antes del scroll
+                    }
+                }
+
+                toggleBtn.addEventListener('click', toggleDetails);
+                if (collapseBtn) {
+                    collapseBtn.addEventListener('click', toggleDetails);
+                }
+            }
+
+            initCarousel('agualuz-carousel', 'next-agualuz');
+            initExpand('toggle-agualuz', 'collapse-agualuz', 'agualuz-details');
+            initCarousel('lemonth-carousel', 'next-lemonth');
+            initExpand('toggle-lemonth', 'collapse-lemonth', 'lemonth-details');
+            initCarousel('fujita-carousel', 'next-fujita');
+            initExpand('toggle-fujita', 'collapse-fujita', 'fujita-details');
+            initExpand('toggle-agora', 'collapse-agora', 'agora-details');
+
+            // Scroll Animation for Projects
+            const projectCards = document.querySelectorAll('.project-card-fade');
+            projectCards.forEach(card => card.classList.add('opacity-0', 'translate-y-10'));
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.remove('opacity-0', 'translate-y-10');
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        }, index * 200);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            projectCards.forEach(card => observer.observe(card));
+        });
+    </script>
+</body>
+</html>
