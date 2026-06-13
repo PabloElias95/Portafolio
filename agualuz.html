@@ -19,8 +19,8 @@
         h3 { font-size: 32px; font-weight: 300; }
         h4 { font-size: 28px; font-weight: 300; }
         
-        .bg-accent { background-color: #E50914; }
-        .text-accent { color: #E50914; }
+        .bg-accent { background-color: #64A0E0; }
+        .text-accent { color: #64A0E0; }
 
         /* Floating Navbar Style */
         #navbar {
@@ -56,7 +56,7 @@
         }
 
         .text-gradient {
-            background: linear-gradient(to right, #F8F8FA, #C39465, #F94869);
+            background: linear-gradient(to right, #F8F8FA, #8AB4F8, #64A0E0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -171,110 +171,188 @@
         </div>
     </nav>
 
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-xl flex-col items-center justify-center p-4 md:p-8">
+        <!-- Lightbox Header -->
+        <div class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-[110]">
+            <div class="flex items-center gap-6">
+                <button id="close-lightbox" class="p-3 rounded-full bg-[#272735] border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <div class="h-8 w-px bg-white/10 hidden md:block"></div>
+                <div class="hidden md:flex items-center gap-2">
+                    <button onclick="setZoom(1)" id="zoom-1" class="zoom-btn px-4 py-2 text-sm font-medium transition-all text-white bg-white/10 rounded-lg">1x</button>
+                    <button onclick="setZoom(1.5)" id="zoom-1.5" class="zoom-btn px-4 py-2 text-sm font-medium transition-all text-white/60 hover:text-white">1.5x</button>
+                    <button onclick="setZoom(2)" id="zoom-2" class="zoom-btn px-4 py-2 text-sm font-medium transition-all text-white/60 hover:text-white">2x</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox Content -->
+        <div id="lightbox-container" class="relative w-full h-full flex items-center justify-center overflow-auto scrollbar-hide">
+            <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl transition-transform duration-300 origin-center">
+        </div>
+    </div>
+
     <!-- Project Content -->
     <main class="pt-32 pb-14">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- Header -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <img src="assets/agualuz/logo.png" alt="AguaLuz Logo" class="w-16 h-16 object-contain">
-                        <span class="inline-block bg-accent/10 text-accent px-4 py-1 rounded-full text-xl font-light uppercase tracking-wider">UI/UX Design</span>
+            <!-- Header Container -->
+            <div class="bg-[#272735] border border-white/10 backdrop-blur-md rounded-[40px] p-10 md:p-16 mb-24 transition-all duration-500 hover:border-[#64A0E0]/20">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-4">
+                            <img src="assets/agualuz/logo.png" alt="AguaLuz Logo" class="w-16 h-16 object-contain">
+                            <span class="inline-block bg-accent/10 text-accent px-4 py-1 rounded-full text-xl font-light uppercase tracking-wider">UI/UX Design</span>
+                        </div>
+                        <h1 class="text-[72px] font-light text-white uppercase tracking-tighter leading-none">AGUALUZ</h1>
                     </div>
-                    <h1 class="text-[72px] font-light text-white uppercase tracking-tighter leading-none">AGUALUZ</h1>
+                    <p class="text-white/60 text-lg max-w-md font-normal leading-relaxed">
+                        Plataforma SaaS para la centralización operativa y gestión de distribución de agua potable.
+                    </p>
                 </div>
-                <p class="text-white/60 text-base max-w-md font-normal leading-relaxed">
-                    Sistema SaaS para la gestión operativa y administración de distribución de agua potable.
-                </p>
             </div>
 
             <!-- Content Details -->
             <div class="space-y-[120px]">
-                <!-- DESCRIPCIÓN -->
-                <div class="flex flex-col md:flex-row items-center gap-16">
-                    <div class="md:w-1/2 space-y-8">
-                        <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">DESCRIPCIÓN DEL PROYECTO</h4>
-                        <p class="text-base text-white/60 leading-relaxed font-normal">Empresa de distribución de bidones que gestionaba pedidos mediante WhatsApp, llamadas y registros manuales. No existía un sistema centralizado para administrar clientes, rutas ni conductores.</p>
-                    </div>
-                    <div class="md:w-1/2"><img src="assets/agualuz/web.png" class="w-full rounded-3xl shadow-2xl"></div>
+                <!-- CONTEXTO -->
+                <div class="space-y-8 max-w-4xl">
+                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">CONTEXTO</h4>
+                    <p class="text-lg text-white/60 leading-relaxed font-normal">Agualuz es una empresa de distribución de agua que gestionaba sus operaciones mediante llamadas telefónicas, WhatsApp y registros manuales. A medida que aumentaba el volumen de pedidos, coordinar clientes, operadores y conductores se volvía cada vez más complejo, generando errores operativos y dificultades para escalar el servicio.</p>
                 </div>
 
-                <!-- OBJETIVO -->
-                <div class="space-y-12">
-                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">OBJETIVO</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                        <p class="text-base text-white/60 leading-relaxed font-normal">Diseñar desde cero un sistema que digitalizara y organizara la operación completa entre oficina y conductores.</p>
-                        <div class="flex flex-col gap-4">
-                            <img src="assets/agualuz/web.png" class="w-full rounded-2xl shadow-xl">
-                            <p class="text-[10px] uppercase tracking-widest text-white/40 text-center font-normal">Visualización de la saas</p>
+                <!-- DESAFÍO -->
+                <div class="space-y-8 max-w-4xl">
+                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">DESAFÍO</h4>
+                    <div class="space-y-6">
+                        <p class="text-lg text-white/60 leading-relaxed font-normal">Diseñar una plataforma capaz de centralizar pedidos, clientes, rutas y conductores dentro de un único sistema.</p>
+                        <p class="text-lg text-white/60 leading-relaxed font-normal">Además del desafío operativo, el proyecto presentó requisitos cambiantes durante gran parte del proceso, por lo que fue necesario estructurar flujos flexibles que mantuvieran una experiencia consistente para los usuarios a medida que evolucionaban las necesidades del negocio.</p>
+                    </div>
+                </div>
+
+                <!-- HALLAZGOS PRINCIPALES -->
+                <div class="space-y-12 border-t border-white/5 pt-20">
+                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">HALLAZGOS PRINCIPALES</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+                        <div class="space-y-3">
+                            <h5 class="text-xl font-medium text-white uppercase">Pedidos sin trazabilidad</h5>
+                            <p class="text-sm text-white/60 leading-relaxed">Los pedidos podían perderse, eliminarse o quedar incompletos durante la gestión manual.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="text-xl font-medium text-white uppercase">Definiciones operativas ambiguas</h5>
+                            <p class="text-sm text-white/60 leading-relaxed">Conceptos fundamentales como las rutas no estaban completamente definidos entre los distintos stakeholders.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="text-xl font-medium text-white uppercase">Comunicación fragmentada</h5>
+                            <p class="text-sm text-white/60 leading-relaxed">Operadores y conductores dependían de múltiples canales para coordinar entregas y resolver incidencias.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="text-xl font-medium text-white uppercase">Escalabilidad limitada</h5>
+                            <p class="text-sm text-white/60 leading-relaxed">La operación dependía en gran medida de procesos manuales difíciles de sostener a medida que aumentaba el volumen de trabajo.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- MI ROL -->
-                <div class="flex flex-col md:flex-row items-center gap-16">
-                    <div class="md:w-1/2 space-y-8">
-                        <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">MI ROL</h4>
-                        <p class="text-base text-white/60 leading-relaxed font-normal">Lideré el diseño de UX/UI, definiendo la arquitectura del sistema, flujos principales y diseño de interfaz, trabajando en conjunto con desarrollo y el cliente durante las iteraciones.</p>
-                    </div>
-                    <div class="md:w-1/2"><img src="assets/agualuz/mi-rol-full.png" class="w-full rounded-3xl shadow-2xl"></div>
-                </div>
-
-                <!-- ARQUITECTURA -->
-                <div class="space-y-12">
-                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">ARQUITECTURA</h4>
-                    <p class="text-base text-white/60 leading-relaxed max-w-3xl font-normal">Diseñé un mapa estructural previo que organizaba módulos, roles y flujos para asegurar escalabilidad y coherencia entre ambas plataformas.</p>
-                    <img src="assets/agualuz/frame50.png" class="w-full rounded-3xl shadow-2xl">
-                </div>
-
-                <!-- PROBLEMA -->
+                <!-- DECISIONES UX -->
                 <div class="space-y-12 border-t border-white/5 pt-20">
-                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">PROBLEMA</h4>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-6 text-white/60 text-base font-normal">
-                        <li class="flex items-start space-x-3"><span class="text-[#E8172C]">•</span> <span>Pedidos manuales y desorganizados</span></li>
-                        <li class="flex items-start space-x-3"><span class="text-[#E8172C]">•</span> <span>Falta de visibilidad sobre rutas y estados</span></li>
-                        <li class="flex items-start space-x-3"><span class="text-[#E8172C]">•</span> <span>Sistema de registros de llamadas antiguo</span></li>
-                        <li class="flex items-start space-x-3"><span class="text-[#E8172C]">•</span> <span>Comunicación informal entre oficina y choferes</span></li>
-                        <li class="flex items-start space-x-3"><span class="text-[#E8172C]">•</span> <span>Información de clientes dispersa</span></li>
-                    </ul>
+                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">DECISIONES UX</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+                        <div class="space-y-3">
+                            <h5 class="text-xl font-medium text-white uppercase">Sistema de estados para pedidos</h5>
+                            <p class="text-sm text-white/60 leading-relaxed">Diseñé una estructura basada en pedidos activos, archivados y eliminados para mejorar la trazabilidad y evitar pérdidas de información dentro de la operación.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="text-xl font-medium text-white uppercase">Gestión flexible de rutas</h5>
+                            <p class="text-sm text-white/60 leading-relaxed">Se definió un modelo que permitía asignaciones manuales inmediatas mientras preparaba el sistema para futuras automatizaciones.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="text-xl font-medium text-white uppercase">Separación de información operativa</h5>
+                            <p class="text-sm text-white/60 leading-relaxed">Se reorganizó la información de clientes y pedidos para reducir redundancias y facilitar la gestión diaria de los operadores.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="text-xl font-medium text-white uppercase">Comunicación integrada</h5>
+                            <p class="text-sm text-white/60 leading-relaxed">Se incorporó un flujo de seguimiento entre operadores y conductores mediante estados y notas compartidas dentro del sistema.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ARQUITECTURA DE INFORMACIÓN -->
+                <div class="space-y-12 border-t border-white/5 pt-20">
+                    <div class="space-y-8 max-w-4xl">
+                        <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">ARQUITECTURA DE INFORMACIÓN</h4>
+                        <p class="text-lg text-white/60 leading-relaxed font-normal">Antes de diseñar las interfaces, estructuré la arquitectura del sistema para comprender la relación entre pedidos, rutas, conductores y administración.</p>
+                        <p class="text-lg text-white/60 leading-relaxed font-normal">Este mapa permitió organizar módulos, permisos y dependencias, asegurando coherencia entre la plataforma administrativa y la aplicación para conductores.</p>
+                    </div>
+
+                    <!-- Visualización de Arquitectura -->
+                    <div class="relative group w-full rounded-[32px] overflow-hidden border border-white/10 bg-[#272735] cursor-zoom-in transition-all duration-500 hover:border-[#64A0E0]/30" onclick="openLightbox('assets/agualuz/arquitectura-final.png')">
+                        <img src="assets/agualuz/arquitectura-final.png" alt="Arquitectura de Información AguaLuz" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                        
+                        <!-- Overlay de interacción -->
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300">
+                            <!-- Botón y Etiqueta en esquina inferior derecha -->
+                            <div class="absolute bottom-8 right-12 flex items-center gap-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <span class="bg-black/40 backdrop-blur-md text-white text-[10px] px-3 py-2 rounded-full uppercase tracking-widest border border-white/10">Expandir vista</span>
+                                <div class="bg-[#64A0E0] text-white p-2 rounded-full shadow-lg">
+                                    <i data-lucide="maximize-2" class="w-4 h-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARRUSEL V3 -->
+                <div class="space-y-12">
+                    <div class="relative group h-[600px] w-full overflow-hidden rounded-[32px] bg-[#272735] border border-white/10">
+                        <div id="v3-carousel" class="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                            <div class="min-w-full h-full p-12 flex items-center justify-center">
+                                <img src="assets/agualuz/v3/Pedidos.png" alt="Gestión de Pedidos" class="max-w-full max-h-full object-contain shadow-2xl rounded-xl cursor-zoom-in" onclick="openLightbox(this.src)">
+                            </div>
+                            <div class="min-w-full h-full p-12 flex items-center justify-center">
+                                <img src="assets/agualuz/v3/Creacion de rutas.png" alt="Creación de Rutas" class="max-w-full max-h-full object-contain shadow-2xl rounded-xl cursor-zoom-in" onclick="openLightbox(this.src)">
+                            </div>
+                            <div class="min-w-full h-full p-12 flex items-center justify-center">
+                                <img src="assets/agualuz/v3/Edición de rutas.png" alt="Edición de Rutas" class="max-w-full max-h-full object-contain shadow-2xl rounded-xl cursor-zoom-in" onclick="openLightbox(this.src)">
+                            </div>
+                            <div class="min-w-full h-full p-12 flex items-center justify-center">
+                                <img src="assets/agualuz/v3/Conductores.png" alt="Gestión de Conductores" class="max-w-full max-h-full object-contain shadow-2xl rounded-xl cursor-zoom-in" onclick="openLightbox(this.src)">
+                            </div>
+                            <div class="min-w-full h-full p-12 flex items-center justify-center">
+                                <img src="assets/agualuz/v3/Pedidos-1.png" alt="Detalle de Pedidos" class="max-w-full max-h-full object-contain shadow-2xl rounded-xl cursor-zoom-in" onclick="openLightbox(this.src)">
+                            </div>
+                        </div>
+
+                        <!-- Subtítulo Pantallas -->
+                        <div class="absolute bottom-8 left-12 z-20">
+                            <p class="text-white/40 text-xs font-bold uppercase tracking-[0.2em]">Pantallas</p>
+                        </div>
+
+                        <!-- Botones de Navegación -->
+                        <button onclick="prevSlide()" class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-[#64A0E0] hover:border-accent">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <button onclick="nextSlide()" class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-[#64A0E0] hover:border-accent">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+
+                        <!-- Indicadores -->
+                        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
+                            <div class="v3-dot w-2 h-2 rounded-full bg-white/20 transition-all duration-300 active bg-white"></div>
+                            <div class="v3-dot w-2 h-2 rounded-full bg-white/20 transition-all duration-300"></div>
+                            <div class="v3-dot w-2 h-2 rounded-full bg-white/20 transition-all duration-300"></div>
+                            <div class="v3-dot w-2 h-2 rounded-full bg-white/20 transition-all duration-300"></div>
+                            <div class="v3-dot w-2 h-2 rounded-full bg-white/20 transition-all duration-300"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- SOLUCIÓN -->
-                <div class="space-y-12 border-t border-white/5 pt-20">
+                <div class="space-y-8 max-w-4xl border-t border-white/5 pt-20">
                     <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">SOLUCIÓN</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                        <div class="space-y-8">
-                            <h5 class="text-2xl font-normal text-white uppercase">App Web (operadores)</h5>
-                            <p class="text-white/60 text-base font-normal">Identificación automática de clientes, gestión de pedidos y visualización de conductores en mapa en tiempo real.</p>
-                            <div class="grid grid-cols-1 gap-6">
-                                <img src="assets/agualuz/web.png" class="w-full rounded-2xl shadow-xl">
-                                <img src="assets/agualuz/Creacion de rutas 3.png" class="w-full rounded-2xl shadow-xl">
-                            </div>
-                        </div>
-                        <div class="space-y-8">
-                            <h5 class="text-2xl font-normal text-white uppercase">App Móvil (conductores)</h5>
-                            <p class="text-white/60 text-base font-normal">Actualización de estado de pedidos, carga de datos de clientes y canal de chat directo con la oficina.</p>
-                            <div class="grid grid-cols-2 gap-6">
-                                <img src="assets/agualuz/Pedidos.png" class="w-full rounded-2xl shadow-xl">
-                                <img src="assets/agualuz/Pedidos.jpg" class="w-full rounded-2xl shadow-xl">
-                            </div>
-                        </div>
-                    </div>
+                    <p class="text-lg text-white/60 leading-relaxed font-normal">La propuesta se materializó en una plataforma SaaS orientada a operadores y administradores, acompañada por una aplicación móvil para conductores.</p>
+                    <p class="text-lg text-white/60 leading-relaxed font-normal">El sistema centraliza la gestión de pedidos, clientes, rutas y recursos operativos dentro de un flujo unificado que permite monitorear entregas, coordinar conductores y mantener la trazabilidad de cada pedido.</p>
                 </div>
 
-                <!-- ITERACIÓN -->
-                <div class="space-y-12 border-t border-white/5 pt-20">
-                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">ITERACIÓN</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <p class="text-base text-white/60 leading-relaxed font-normal">Probamos y ajustamos el flujo de creación de rutas para que fuera lo más automatizado posible, reduciendo el tiempo de despacho en un 40%.</p>
-                        <img src="assets/agualuz/main-content.png" class="w-full rounded-3xl shadow-2xl">
-                    </div>
-                </div>
-
-                <!-- RESULTADO -->
-                <div class="space-y-12 border-t border-white/5 pt-20">
-                    <h4 class="text-[72px] font-normal text-white uppercase tracking-tighter leading-tight">RESULTADO</h4>
-                    <p class="text-base text-white/60 leading-relaxed max-w-3xl font-normal">Se logró un sistema integral que no solo digitalizó la operación, sino que permitió a la empresa escalar su volumen de pedidos sin necesidad de contratar más personal administrativo.</p>
                 <!-- Back Link -->
                 <div class="flex justify-center pt-24 pb-12">
                     <a href="index.html#proyectos" class="group flex items-center gap-4 text-white/40 hover:text-white transition-all text-sm font-light uppercase tracking-widest">
@@ -283,13 +361,14 @@
                     </a>
                 </div>
 
+
                 <!-- More Projects -->
                 <div class="py-24 border-t border-white/5">
                     <h3 class="text-[72px] font-light uppercase tracking-tighter leading-tight text-white text-center mb-16">AÚN QUEDAN COSAS <br> POR <span class="text-accent">EXPLORAR</span></h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                         <!-- Project: LeMonth -->
                         <a href="lemonth.html" class="group relative block h-[300px] rounded-[32px] overflow-hidden transition-all duration-500 hover:scale-[1.02]">
-                            <img src="assets/lemonth/proyectcard-lemoth.png" class="absolute inset-0 w-full h-full object-cover object-top">
+                            <img src="assets/card-proyect.png" class="absolute inset-0 w-full h-full object-cover object-top">
                             <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all"></div>
                             <div class="absolute inset-0 flex flex-col items-center justify-center">
                                 <h3 class="text-2xl font-medium text-white uppercase tracking-tight">LEMONTH</h3>
@@ -297,7 +376,7 @@
                         </a>
                         <!-- Project: Fujita Quest -->
                         <a href="fujita.html" class="group relative block h-[300px] rounded-[32px] overflow-hidden transition-all duration-500 hover:scale-[1.02]">
-                            <img src="assets/lemonth/proyectcard-lemoth.png" class="absolute inset-0 w-full h-full object-cover object-top">
+                            <img src="assets/card-proyect.png" class="absolute inset-0 w-full h-full object-cover object-top">
                             <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all"></div>
                             <div class="absolute inset-0 flex flex-col items-center justify-center">
                                 <h3 class="text-2xl font-medium text-white uppercase tracking-tight">FUJITA QUEST</h3>
@@ -416,35 +495,89 @@
         let currentZoom = 1;
         const lightboxImg = document.getElementById('lightbox-img');
 
+        // Carousel v3 Logic
+        let currentSlide = 0;
+        const carousel = document.getElementById('v3-carousel');
+        const dots = document.querySelectorAll('.v3-dot');
+        const totalSlides = 5;
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('bg-white');
+                    dot.classList.remove('bg-white/20');
+                } else {
+                    dot.classList.remove('bg-white');
+                    dot.classList.add('bg-white/20');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            if (lightbox && lightboxImg) {
+                lightboxImg.src = src;
+                lightbox.classList.remove('hidden');
+                lightbox.classList.add('flex');
+                setZoom(1);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
         function setZoom(level) {
             currentZoom = level;
             updateZoom();
         }
 
         function updateZoom() {
-            lightboxImg.style.transform = `scale(${currentZoom})`;
-            
             // Update UI
             document.querySelectorAll('.zoom-btn').forEach(btn => {
                 btn.classList.remove('text-white', 'bg-white/10', 'rounded-lg');
                 btn.classList.add('text-white/60');
             });
             const activeBtn = document.getElementById(`zoom-${currentZoom}`);
-            activeBtn.classList.remove('text-white/60');
-            activeBtn.classList.add('text-white', 'bg-white/10', 'rounded-lg');
+            if (activeBtn) {
+                activeBtn.classList.remove('text-white/60');
+                activeBtn.classList.add('text-white', 'bg-white/10', 'rounded-lg');
+            }
 
-            // Adjust container if zoomed
             const container = document.getElementById('lightbox-container');
-            if (currentZoom > 1) {
-                container.classList.remove('items-center', 'justify-center');
-                container.classList.add('block');
-                lightboxImg.classList.remove('max-w-full', 'max-h-[90vh]');
-                lightboxImg.style.margin = 'auto';
-            } else {
+            
+            if (currentZoom === 1) {
+                // Fit to screen mode
+                lightboxImg.style.transform = 'none';
+                lightboxImg.style.width = 'auto';
+                lightboxImg.style.height = 'auto';
+                lightboxImg.style.maxWidth = '100%';
+                lightboxImg.style.maxHeight = '90vh';
                 container.classList.add('items-center', 'justify-center');
-                container.classList.remove('block');
-                lightboxImg.classList.add('max-w-full', 'max-h-[90vh]');
-                lightboxImg.style.margin = '0';
+                container.classList.remove('block', 'p-[20vh]');
+                container.scrollTo(0, 0);
+            } else {
+                // Zoom mode using real dimensions for proper scrolling
+                lightboxImg.style.transform = 'none';
+                lightboxImg.style.maxWidth = 'none';
+                lightboxImg.style.maxHeight = 'none';
+                
+                // Scale width relative to viewport
+                // 2x zoom = 200% of the viewport width or at least its natural size
+                lightboxImg.style.width = (currentZoom * 100) + 'vw';
+                lightboxImg.style.height = 'auto';
+                
+                container.classList.remove('items-center', 'justify-center');
+                container.classList.add('block', 'p-[20vh]'); // Padding adds "breathing room" to see margins
             }
         }
 

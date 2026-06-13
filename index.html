@@ -19,8 +19,8 @@
         h3 { font-size: 32px; font-weight: 500; }
         h4 { font-size: 28px; font-weight: 500; }
         
-        .bg-accent { background-color: #E50914; }
-        .text-accent { color: #E50914; }
+        .bg-accent { background-color: #64A0E0; }
+        .text-accent { color: #64A0E0; }
         
         /* New Project Grid Styles */
         .project-grid {
@@ -198,8 +198,8 @@
         }
 
         .skill-card:hover {
-            background: rgba(229, 9, 20, 0.02);
-            border-color: rgba(229, 9, 20, 0.3);
+            background: rgba(100, 160, 224, 0.02);
+            border-color: rgba(100, 160, 224, 0.3);
             transform: translateY(-8px);
         }
 
@@ -226,7 +226,7 @@
 
         .skill-card:hover .lucide {
             transform: scale(1.2) rotate(12deg);
-            filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.5));
+            filter: drop-shadow(0 0 8px rgba(100, 160, 224, 0.5));
         }
 
         a:hover .lucide, button:hover .lucide {
@@ -277,7 +277,7 @@
         }
 
         .text-gradient {
-            background: linear-gradient(to right, #F8F8FA, #C39465, #F94869);
+            background: linear-gradient(to right, #F8F8FA, #8AB4F8, #64A0E0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -354,14 +354,14 @@
             
             <!-- UIUX Text (Color split at 53.5% aligned perfectly with the folder edge) -->
             <div class="absolute top-[152px] left-[calc(50%-360px-48px)] -translate-x-[53.5%] z-20 pointer-events-none hidden md:flex items-center">
-                <div class="text-[160px] font-bold uppercase leading-none tracking-tighter bg-gradient-to-r from-white from-[53.5%] to-[#E50914] to-[53.5%] bg-clip-text text-transparent pr-8 pb-2">
+                <div class="text-[160px] font-bold uppercase leading-none tracking-tighter bg-gradient-to-r from-white from-[53.5%] to-[#64A0E0] to-[53.5%] bg-clip-text text-transparent pr-8 pb-2">
                     UIUX
                 </div>
             </div>
 
             <!-- DESIGNER Word (Split at the middle of the 'S': 31.25%, shifted 48px left) -->
             <div class="absolute top-[280px] left-[calc(50%+360px-48px)] -translate-x-[31.25%] z-40 pointer-events-none hidden md:flex items-center">
-                <div class="text-[160px] font-medium uppercase leading-none tracking-tighter bg-gradient-to-r from-[#E50914] from-[31.25%] to-white to-[31.25%] bg-clip-text text-transparent pr-8 pb-2">
+                <div class="text-[160px] font-medium uppercase leading-none tracking-tighter bg-gradient-to-r from-[#64A0E0] from-[31.25%] to-white to-[31.25%] bg-clip-text text-transparent pr-8 pb-2">
                     DESIGNER
                 </div>
             </div>
@@ -371,14 +371,14 @@
                 <div class="space-y-0">
                     <h2 class="text-[40px] font-light text-white uppercase leading-tight">HOLA,</h2>
                     <h2 class="text-[40px] font-light text-white uppercase leading-tight">
-                        SOY <span class="text-[#E50914]">PABLO ELIAS</span>
+                        SOY <span class="text-[#64A0E0]">PABLO ELIAS</span>
                     </h2>
                 </div>
-                <p class="text-white/70 text-base leading-relaxed text-left font-normal mb-10">
+                <p class="text-white/70 text-lg leading-relaxed text-left font-normal mb-10">
                     Interfaces claras, decisiones reales y productos que funcionan.
                 </p>
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                    <a href="#proyectos" class="bg-[#E50914] text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition shadow-lg flex items-center justify-center space-x-2 group/btn">
+                    <a href="#proyectos" class="bg-[#64A0E0] text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition shadow-lg flex items-center justify-center space-x-2 group/btn">
                         <img src="Vector.png" alt="" class="h-[1.5em] w-0 opacity-0 group-hover/btn:w-6 group-hover/btn:opacity-100 transition-all duration-300 object-contain brightness-0 invert">
                         <span>Ver Proyectos</span>
                     </a>
@@ -403,17 +403,17 @@
                 <div class="project-card-wrapper project-card-fade transition-all duration-700 ease-out">
                     <a href="agualuz.html" class="group relative block w-[400px] h-[450px] rounded-[32px] overflow-hidden transition-all duration-500">
                         <!-- Fondo -->
-                        <img src="assets/lemonth/proyectcard-lemoth.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="assets/card-proyect.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
                         
                         <!-- Texto (Arriba Izquierda) -->
                         <div class="absolute top-8 left-8 z-20">
                             <h3 class="text-xl font-medium text-white uppercase tracking-tight">AGUALUZ</h3>
-                            <p class="text-base text-white/70">Saas + mobile</p>
+                            <p class="text-lg text-white/70">SaaS + Mobile</p>
                         </div>
 
                         <!-- Texto "Ver" (Inferior Derecha - Solo visible en Hover) -->
                         <div class="absolute bottom-[32px] right-[48px] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="text-base font-medium text-white uppercase tracking-widest">Explorar</span>
+                            <span class="text-lg font-medium text-white uppercase tracking-widest">Explorar</span>
                         </div>
                         
                         <!-- Elemento de Interacción (Entra con rebote sutil desde abajo a la izquierda, efecto asomado) -->
@@ -426,17 +426,17 @@
                 <div class="project-card-wrapper project-card-fade transition-all duration-700 ease-out">
                     <a href="lemonth.html" class="group relative block w-[400px] h-[450px] rounded-[32px] overflow-hidden transition-all duration-500">
                         <!-- Fondo -->
-                        <img src="assets/lemonth/proyectcard-lemoth.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="assets/card-proyect.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
                         
                         <!-- Texto (Arriba Izquierda) -->
                         <div class="absolute top-8 left-8 z-20">
                             <h3 class="text-xl font-medium text-white uppercase tracking-tight">LEMONTH</h3>
-                            <p class="text-base text-white/70">Product Website</p>
+                            <p class="text-lg text-white/70">Product Website</p>
                         </div>
 
                         <!-- Texto "Ver" (Inferior Derecha - Solo visible en Hover) -->
                         <div class="absolute bottom-[32px] right-[48px] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="text-base font-medium text-white uppercase tracking-widest">Explorar</span>
+                            <span class="text-lg font-medium text-white uppercase tracking-widest">Explorar</span>
                         </div>
                         
                         <!-- Elemento de Interacción (Entra con rebote sutil desde abajo a la izquierda) -->
@@ -449,17 +449,17 @@
                 <div class="project-card-wrapper project-card-fade transition-all duration-700 ease-out">
                     <a href="fujita.html" class="group relative block w-[400px] h-[450px] rounded-[32px] overflow-hidden transition-all duration-500">
                         <!-- Fondo -->
-                        <img src="assets/lemonth/proyectcard-lemoth.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="assets/card-proyect.png" alt="Project Background" class="absolute inset-0 w-full h-full object-cover">
                         
                         <!-- Texto (Arriba Izquierda) -->
                         <div class="absolute top-8 left-8 z-20">
                             <h3 class="text-xl font-medium text-white uppercase tracking-tight">FUJITA</h3>
-                            <p class="text-base text-white/70">Mobile Game</p>
+                            <p class="text-lg text-white/70">Mobile Game</p>
                         </div>
 
                         <!-- Texto "Ver" (Inferior Derecha - Solo visible en Hover) -->
                         <div class="absolute bottom-[32px] right-[48px] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="text-base font-medium text-white uppercase tracking-widest">Explorar</span>
+                            <span class="text-lg font-medium text-white uppercase tracking-widest">Explorar</span>
                         </div>
                         
                         <!-- Elemento de Interacción (Entra con rebote sutil desde abajo a la izquierda, efecto asomado) -->
@@ -480,19 +480,19 @@
                 
                 <div class="flex flex-col lg:flex-row gap-16 items-start lg:items-center">
                     <!-- Tarjeta Dorada -->
-                    <div class="relative w-full max-w-[400px] h-[450px] rounded-[32px] overflow-hidden border border-[#C39465]/20 bg-[#0d0f1a] shadow-2xl group shrink-0">
+                    <div class="relative w-full max-w-[400px] h-[450px] rounded-[32px] overflow-hidden border border-[#8AB4F8]/20 bg-[#0d0f1a] shadow-2xl group shrink-0">
                         <!-- Fondo con textura sutil -->
-                        <img src="assets/lemonth/proyectcard-lemoth.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity">
-                        <div class="absolute inset-0 bg-gradient-to-br from-[#C39465]/10 to-transparent"></div>
+                        <img src="assets/card-proyect.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#8AB4F8]/10 to-transparent"></div>
                         
                         <!-- Título en la Tarjeta -->
                         <div class="absolute top-8 left-8 z-20">
-                            <h3 class="text-xl font-medium text-white uppercase tracking-tight">ÁG<span class="text-[#C39465]">O</span>RA</h3>
-                            <p class="text-base text-[#C39465]/70">UX/UI Case Study</p>
+                            <h3 class="text-xl font-medium text-white uppercase tracking-tight">ÁG<span class="text-[#8AB4F8]">O</span>RA</h3>
+                            <p class="text-lg text-[#8AB4F8]/70">UX/UI Case Study</p>
                         </div>
 
                         <!-- Texto en proceso (Hover) - 24px desde el borde inferior -->
-                        <p class="absolute bottom-[24px] left-8 z-40 text-base font-medium text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">en proceso</p>
+                        <p class="absolute bottom-[24px] left-8 z-40 text-lg font-medium text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">en proceso</p>
 
                         <!-- Elemento de Interacción (Yomero) -->
                         <div class="absolute bottom-[-100px] -left-20 z-30 w-72 h-auto opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.2,0.64,1)] group-hover:bottom-[-40px] group-hover:left-[-40px] group-hover:opacity-100">
@@ -542,10 +542,10 @@
                         </div>
                         <h4 class="text-2xl font-bold text-white uppercase tracking-tight mb-10">PROBLEMÁTICA</h4>
                         <div class="mt-auto flex flex-col gap-3 w-full max-w-[300px]">
-                            <span class="px-4 py-4 bg-[#3a1111] text-white rounded-2xl text-[18px] font-medium border border-white/5">Beneficios dispersos</span>
-                            <span class="px-4 py-4 bg-[#3a1111] text-white rounded-2xl text-[18px] font-medium border border-white/5">Difícil acceso a promociones</span>
-                            <span class="px-4 py-4 bg-[#3a1111] text-white rounded-2xl text-[18px] font-medium border border-white/5">Baja visibilidad para comercios</span>
-                            <span class="px-4 py-4 bg-[#3a1111] text-white rounded-2xl text-[18px] font-medium border border-white/5">Falta de validación estudiantil</span>
+                            <span class="px-4 py-4 bg-[#1a2a3a] text-white rounded-2xl text-[18px] font-medium border border-white/5">Beneficios dispersos</span>
+                            <span class="px-4 py-4 bg-[#1a2a3a] text-white rounded-2xl text-[18px] font-medium border border-white/5">Difícil acceso a promociones</span>
+                            <span class="px-4 py-4 bg-[#1a2a3a] text-white rounded-2xl text-[18px] font-medium border border-white/5">Baja visibilidad para comercios</span>
+                            <span class="px-4 py-4 bg-[#1a2a3a] text-white rounded-2xl text-[18px] font-medium border border-white/5">Falta de validación estudiantil</span>
                         </div>
                     </div>
                     <!-- Solución Estudiantes -->
@@ -713,7 +713,7 @@
                     <span class="bg-black/20 text-accent uppercase tracking-[0.3em] text-xl font-medium mb-6 inline-block px-6 py-2 rounded-full">skill</span>
                     <h3 class="text-[72px] font-light uppercase tracking-tighter relative z-10 leading-none text-gradient">DE PROBLEMA A SOLUCIÓN</h3>
                 </div>
-                <p class="text-white/40 text-base max-w-sm pb-2 border-l-2 border-accent pl-6 font-normal">
+                <p class="text-white/40 text-lg max-w-sm pb-2 border-l-2 border-accent pl-6 font-normal">
                     Combinando estética y funcionalidad para crear productos digitales memorables.
                 </p>
             </div>
@@ -726,13 +726,13 @@
                     </div>
                     <div class="space-y-4">
                         <h4 class="text-xl font-medium text-white uppercase tracking-tight">Design Thinking</h4>
-                        <p class="text-base text-white/50 leading-relaxed font-normal">Definición de producto, propuesta de valor y alineación de objetivos.</p>
+                        <p class="text-lg text-white/50 leading-relaxed font-normal">Defino productos y propuestas de valor alineadas con los objetivos del negocio.</p>
                         <ul class="space-y-2 pt-4 border-t border-white/5">
                             <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Problem Framing</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Information Architecture</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Arquitectura de Información</li>
                             <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> User Flow Mapping</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Feature Prioritization</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Conversion-Oriented Decisions</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Priorización de Features</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Decisiones orientadas a conversión</li>
                         </ul>
                     </div>
                 </div>
@@ -743,15 +743,15 @@
                     </div>
                     <div class="space-y-4">
                         <h4 class="text-xl font-medium text-white uppercase tracking-tight">Visual & Interface Systems</h4>
-                        <p class="text-base text-white/50 leading-relaxed font-normal">Creación de interfaces intuitivas y estéticas con enfoque en la usabilidad.</p>
+                        <p class="text-lg text-white/50 leading-relaxed font-normal">Armo interfaces intuitivas y estéticas poniendo siempre el foco en la usabilidad.</p>
                         <ul class="space-y-2 pt-4 border-t border-white/5">
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> High-Fidelity UI Design</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Diseño UI de alta fidelidad</li>
                             <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Layout & Grid Systems</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Typography Systems</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Color Systems & Visual Hierarchy</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Component-Based Design</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Sistemas tipográficos</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Jerarquía visual y color</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Diseño basado en componentes</li>
                             <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Design Systems Thinking</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Brand Translation to Interface</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Bajada de marca a interfaz</li>
                         </ul>
                     </div>
                 </div>
@@ -762,15 +762,15 @@
                     </div>
                     <div class="space-y-4">
                         <h4 class="text-xl font-medium text-white uppercase tracking-tight">Product & Structure</h4>
-                        <p class="text-base text-white/50 leading-relaxed font-normal">Análisis de comportamiento y necesidades de usuarios reales.</p>
+                        <p class="text-lg text-white/50 leading-relaxed font-normal">Analizo cómo se comportan los usuarios y qué es lo que realmente necesitan.</p>
                         <ul class="space-y-2 pt-4 border-t border-white/5">
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Information Architecture</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Arquitectura de Información</li>
                             <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> User Flow Mapping</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Feature Prioritization</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Conversion-Oriented Decisions</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Dashboard Structuring</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Content Hierarchy</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Iterative Design Process</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Priorización de features</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Decisiones orientadas a conversión</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Estructuración de Dashboards</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Jerarquía de contenidos</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Proceso de diseño iterativo</li>
                         </ul>
                     </div>
                 </div>
@@ -781,13 +781,13 @@
                     </div>
                     <div class="space-y-4">
                         <h4 class="text-xl font-medium text-white uppercase tracking-tight">Tools & Execution</h4>
-                        <p class="text-base text-white/50 leading-relaxed font-normal">Construcción de prototipos interactivos de alta fidelidad.</p>
+                        <p class="text-lg text-white/50 leading-relaxed font-normal">Construyo prototipos interactivos de alta fidelidad listos para producción.</p>
                         <ul class="space-y-2 pt-4 border-t border-white/5">
                             <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Figma (Auto Layout, Components, Variants)</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Responsive Design</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Interactive Prototyping</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Design Handoff to Developers</li>
-                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> UI Documentation</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Diseño Responsive</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Prototipado interactivo</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Design Handoff para desarrolladores</li>
+                            <li class="flex items-center gap-2 text-[18px] text-white/40 font-normal px-6 py-3"><span class="w-1 h-1 rounded-full bg-accent"></span> Documentación de UI</li>
                         </ul>
                     </div>
                 </div>
@@ -811,10 +811,10 @@
                     </div>
                     
                     <div class="space-y-8">
-                        <p class="text-base text-white/80 font-normal leading-relaxed">
+                        <p class="text-lg text-white/80 font-normal leading-relaxed">
                             Soy diseñador UI/UX con experiencia en el diseño de productos digitales, me especializo en diseño de interfaces con estructuras claras y limpias.
                         </p>
-                        <p class="text-base text-white/80 font-normal leading-relaxed">
+                        <p class="text-lg text-white/80 font-normal leading-relaxed">
                             He trabajado en múltiples proyectos colaborando tanto en ejecución visual como en coordinación de equipos, participando en decisiones de producto y organización de funcionalidades.
                         </p>
                     </div>
@@ -837,7 +837,7 @@
                     <h2 class="text-[72px] font-light text-white uppercase tracking-tighter leading-none">
                         CONTACTO
                     </h2>
-                    <p class="text-base text-white/60 max-w-md font-normal leading-relaxed">
+                    <p class="text-lg text-white/60 max-w-md font-normal leading-relaxed">
                         Estoy disponible para nuevos desafíos y colaboraciones. Hablemos sobre cómo puedo ayudarte a potenciar tu producto.
                     </p>
                 </div>
@@ -847,22 +847,22 @@
                         <h4 class="text-2xl font-medium text-white uppercase tracking-tight">Hablemos directamente</h4>
                         <div class="space-y-8">
                             <a href="mailto:pabloeliasn.n@gmail.com" class="flex items-center gap-6 text-white/60 hover:text-white transition-all duration-300 group">
-                                <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-accent transition-all duration-300">
+                                <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-[#64A0E0] transition-all duration-300">
                                     <i data-lucide="mail" class="w-8 h-8 group-hover:scale-110 transition-transform"></i>
                                 </div>
                                 <div class="space-y-1">
-                                    <p class="text-base font-medium uppercase tracking-widest text-white/40">Email</p>
-                                    <p class="text-base font-normal">pabloeliasn.n@gmail.com</p>
+                                    <p class="text-lg font-medium uppercase tracking-widest text-white/40">Email</p>
+                                    <p class="text-lg font-normal">pabloeliasn.n@gmail.com</p>
                                 </div>
                             </a>
 
                             <a href="https://wa.me/5492996341746" target="_blank" class="flex items-center gap-6 text-white/60 hover:text-white transition-all duration-300 group">
-                                <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-accent transition-all duration-300">
+                                <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:bg-[#64A0E0] transition-all duration-300">
                                     <i data-lucide="phone" class="w-8 h-8 group-hover:scale-110 transition-transform"></i>
                                 </div>
                                 <div class="space-y-1">
-                                    <p class="text-base font-medium uppercase tracking-widest text-white/40">Teléfono / WhatsApp</p>
-                                    <p class="text-base font-normal">+54 9 299 6341746</p>
+                                    <p class="text-lg font-medium uppercase tracking-widest text-white/40">Teléfono / WhatsApp</p>
+                                    <p class="text-lg font-normal">+54 9 299 6341746</p>
                                 </div>
                             </a>
                         </div>
